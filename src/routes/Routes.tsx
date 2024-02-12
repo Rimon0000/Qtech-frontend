@@ -2,7 +2,7 @@ import {
     createBrowserRouter,
   } from "react-router-dom";
 import App from "../App";
-import Dashboard from "@/pages/Dashboard";
+import TaskList from "@/pages/TaskList/TaskList";
   
   const router = createBrowserRouter([
     {
@@ -11,7 +11,7 @@ import Dashboard from "@/pages/Dashboard";
       children: [
         {
             index: true,
-            element: <Dashboard></Dashboard>
+            element: <TaskList></TaskList>
         }
       ]
     },
