@@ -11,6 +11,7 @@ const TaskList = () =>{
     const [tasks, setTasks] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
+    const [selectItem, setSelectItem] = useState('')
 
     //for get data
     useEffect(() =>{
@@ -81,12 +82,24 @@ const TaskList = () =>{
       }
     })
   }
-  
-   
+
+  //filter by priority
+    const handleChange = (e) =>{
+        setSelectItem(e.target.value)
+    }
+    const filterBasedOnPriority = tasks.filter(task => task.priority === selectItem || selectItem === '')
 
 
     return (
-        <div className="border-2">
+        <div>
+            <div className="text-right mb-2 font-semibold">
+                  <select value={selectItem || ""} onChange={handleChange} className="border-2 py-2 px-4 rounded-md">
+                    <option value="" className='bg-slate-300 px-8 py-2'>Filter By Priority</option>
+                    <option value="low">Low</option>
+                    <option  value="medium">Medium</option>
+                    <option  value="high">High</option>
+                  </select>
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -97,7 +110,7 @@ const TaskList = () =>{
                 </TableRow>
               </TableHeader>
               <TableBody className="font-semibold">
-                {tasks.map((task, index) => (
+                {filterBasedOnPriority.map((task, index) => (
                   <TableRow key={index}>
                     <TableCell>{task?.title}</TableCell>
                     <TableCell>{task?.priority}</TableCell>
@@ -109,18 +122,18 @@ const TaskList = () =>{
                             onClick={() => handleMakeComplete(task._id)}
                             className=" hover:bg-slate-600  px-4 py-2 rounded-md"
                           >
-                            Completed
+                            Mark Completed
                           </Button>
                         }
                         <hr className="border-2 mx-2 h-7 bg-slate-800"></hr>
                         <Button variant="destructive" onClick={() => handleDelete(task._id)}
-                          className=" hover:bg-slate-700  px-4 py-2 rounded-md"
+                          className=" hover:bg-slate-700 px-2 py-2 rounded-md"
                         >
-                          <Trash2 className="h-6 w-6" />
+                          <Trash2/>
                         </Button>
                         <hr className="border-2 h-7 bg-slate-800"></hr>
                         <Link to={`update-task/${task._id}`}>
-                          <Button className="hover:bg-slate-600 hover:text-white  px-4 py-2 rounded-md" variant="secondary">
+                          <Button className="hover:bg-slate-600 hover:text-white  px-2 py-2 rounded-md" variant="secondary">
                             <FilePenLine></FilePenLine>
                           </Button>
                         </Link>
@@ -129,8 +142,8 @@ const TaskList = () =>{
                   </TableRow>
                 ))}
               </TableBody>
-              <TableFooter className="">
-                <TableRow className="text-xl">
+              <TableFooter>
+                <TableRow className="text-lg">
                     <TableCell>Number of Total Tasks:</TableCell>
                     <TableCell>{tasks.length}</TableCell>
                     <TableCell>Number of Total Completed Tasks:</TableCell>
