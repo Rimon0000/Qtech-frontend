@@ -26,7 +26,7 @@ const UpdateTask = () =>{
         }
 
         //send data to the server
-        fetch(`http://localhost:5000/api/tasks/${_id}`,{
+        fetch(`http://localhost:5000/api/tasks/update-task/${_id}`,{
           method: 'PATCH',
           headers: {
             'content-type': 'application/json'

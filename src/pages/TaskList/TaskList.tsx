@@ -62,8 +62,24 @@ const TaskList = () =>{
   
 
   //handle complete
-  const handleComplete = (id) =>{
-    console.log("complete");
+  const handleMakeComplete = (id) =>{
+    console.log(id);
+    fetch(`http://localhost:5000/api/tasks/status-complete/${id}`,{
+      method: 'PATCH'
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+      if(data && data.success){
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: "The Task is Completed Now!",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
   }
   
    
@@ -88,13 +104,15 @@ const TaskList = () =>{
                     <TableCell>{task?.status}</TableCell>
                     <TableCell className="text-right flex items-center justify-end place-content-center mt-7">
                       <div className="flex justify-end items-center space-x-2">
-                        <Button
-                          onClick={() => handleComplete(task.id)}
-                          className=" hover:bg-slate-600  px-4 py-2 rounded-md"
-                        >
-                          Completed
-                        </Button>
-                        <hr className="border-2 h-7 bg-slate-800"></hr>
+                        {task.status === 'completed' ? 'Completed' :
+                          <Button
+                            onClick={() => handleMakeComplete(task._id)}
+                            className=" hover:bg-slate-600  px-4 py-2 rounded-md"
+                          >
+                            Completed
+                          </Button>
+                        }
+                        <hr className="border-2 mx-2 h-7 bg-slate-800"></hr>
                         <Button variant="destructive" onClick={() => handleDelete(task._id)}
                           className=" hover:bg-slate-700  px-4 py-2 rounded-md"
                         >
