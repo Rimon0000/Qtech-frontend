@@ -4,6 +4,7 @@ import {
 import App from "../App";
 import TaskList from "@/pages/TaskList/TaskList";
 import AddTask from "@/pages/TaskList/AddTask";
+import UpdateTask from "@/pages/TaskList/UpdateTask";
   
   const router = createBrowserRouter([
     {
@@ -17,6 +18,11 @@ import AddTask from "@/pages/TaskList/AddTask";
         {
           path: "add-task",
           element: <AddTask></AddTask>
+        },
+        {
+          path: "update-task/:id",
+          element: <UpdateTask></UpdateTask>,
+          loader: ({params}) => fetch(`http://localhost:5000/api/tasks/${params.id}`)
         }
       ]
     },

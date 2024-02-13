@@ -47,19 +47,21 @@ const TaskList = () =>{
 
 
     return (
-        <div>
+        <div className="border-2">
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>
+                  <TableHead>Priority</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
+                  <TableHead className="text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="font-semibold">
                 {tasks.map((task, index) => (
                   <TableRow key={index}>
                     <TableCell>{task?.title}</TableCell>
+                    <TableCell>{task?.priority}</TableCell>
                     <TableCell>{task?.status}</TableCell>
                     <TableCell className="text-right flex items-center justify-end place-content-center mt-7">
                       <div className="flex justify-end items-center space-x-2">
@@ -70,12 +72,18 @@ const TaskList = () =>{
                           Completed
                         </Button>
                         <hr className="border-2 h-7 bg-slate-800"></hr>
-                        <Button
-                          onClick={() => handleDelete(task.id)}
+                        <Button variant="destructive"
+                          onClick={() => handleDelete(task._id)}
                           className=" hover:bg-slate-700  px-4 py-2 rounded-md"
                         >
                           <Trash2 className="h-6 w-6" />
                         </Button>
+                        <hr className="border-2 h-7 bg-slate-800"></hr>
+                        <Link to={`update-task/${task._id}`}>
+                          <Button className="hover:bg-slate-600 hover:text-white  px-4 py-2 rounded-md" variant="secondary">
+                            <FilePenLine></FilePenLine>
+                          </Button>
+                        </Link>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -83,9 +91,9 @@ const TaskList = () =>{
               </TableBody>
               <TableFooter className="">
                 <TableRow className="text-xl">
-                    <TableCell>Total Tasks</TableCell>
+                    <TableCell>Number of Total Tasks:</TableCell>
                     <TableCell>{tasks.length}</TableCell>
-                    <TableCell>Total Completed Tasks</TableCell>
+                    <TableCell>Number of Total Completed Tasks:</TableCell>
                     <TableCell>{completedTasksCount}</TableCell>
                 </TableRow>
               </TableFooter>
