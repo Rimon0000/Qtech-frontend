@@ -1,16 +1,9 @@
 import { Button } from "@/components/ui/button";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 import { FilePenLine, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 
@@ -40,10 +33,40 @@ const TaskList = () =>{
         return <p>Loading .....</p>;
       }
 
-    //
-    const handleDelete = () =>{
-        console.log("delete");
-    }
+
+  //handle delete
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await fetch(`http://localhost:5000/api/tasks/${id}`,{
+          method: "DELETE",
+        });
+        const remaining = tasks.filter(task => task._id !== id)
+        setTasks(remaining)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Task Deleted Successfully.",
+          icon: "success"
+        });
+      }
+    });
+  };
+  
+
+  //handle complete
+  const handleComplete = (id) =>{
+    console.log("complete");
+  }
+  
+   
 
 
     return (
@@ -66,14 +89,13 @@ const TaskList = () =>{
                     <TableCell className="text-right flex items-center justify-end place-content-center mt-7">
                       <div className="flex justify-end items-center space-x-2">
                         <Button
-                          onClick={() => handleDelete(task.id)}
+                          onClick={() => handleComplete(task.id)}
                           className=" hover:bg-slate-600  px-4 py-2 rounded-md"
                         >
                           Completed
                         </Button>
                         <hr className="border-2 h-7 bg-slate-800"></hr>
-                        <Button variant="destructive"
-                          onClick={() => handleDelete(task._id)}
+                        <Button variant="destructive" onClick={() => handleDelete(task._id)}
                           className=" hover:bg-slate-700  px-4 py-2 rounded-md"
                         >
                           <Trash2 className="h-6 w-6" />

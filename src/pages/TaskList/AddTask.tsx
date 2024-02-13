@@ -14,12 +14,15 @@ const AddTask = () => {
 
     const form = e.target;
     const title = form.title.value;
+    const priority = form.priority.value;
+    const status = form.status.value;
 
     const newTask = {
       title,
       priority,
       status
     }
+    console.log(newTask);
 
     // //send data to the server 
     fetch('http://localhost:5000/api/tasks',{
@@ -59,7 +62,7 @@ const AddTask = () => {
                 </div>
                 <div>
                 <Label htmlFor="Priority" className="flex text-left py-2 text-base">Priority</Label>
-                    <select value={priority} onChange={(e) => setPriority(e.target.value)}
+                    <select name="priority" onChange={(e) => setPriority(e.target.value)}
                       className="shadow  border rounded w-full py-3 px-3 mb-4 text-gray-700"
                     >
                       <option value="low">Low Priority</option>
@@ -70,7 +73,7 @@ const AddTask = () => {
                 <div>
                     <Label htmlFor="Status" className="flex text-left py-2 text-base">Status</Label>
                     <select
-                      value={status}
+                      name="status"
                       onChange={(e) => setStatus(e.target.value)}
                       className="shadow  border rounded w-full py-3 px-3 mb-6 text-gray-700"
                     >
