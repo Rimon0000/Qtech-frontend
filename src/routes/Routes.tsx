@@ -5,6 +5,7 @@ import App from "../App";
 import TaskList from "@/pages/TaskList/TaskList";
 import AddTask from "@/pages/TaskList/AddTask";
 import UpdateTask from "@/pages/TaskList/UpdateTask";
+import Home from "@/pages/TaskList/Home";
   
   const router = createBrowserRouter([
     {
@@ -13,8 +14,12 @@ import UpdateTask from "@/pages/TaskList/UpdateTask";
       children: [
         {
             index: true,
-            element: <TaskList></TaskList>
+            element: <Home></Home>
         },
+        {
+          path: "task-list",
+          element: <TaskList></TaskList>
+      },
         {
           path: "add-task",
           element: <AddTask></AddTask>
