@@ -22,7 +22,7 @@ const SideBar = () => {
         </NavLink>
 
         <NavLink
-          to="/task-list"
+          to="/add-task"
           className={({ isActive }) =>
             cn(
               "p-2 bg-green-300 rounded-md transition-all flex gap-2 items-center",
@@ -33,7 +33,7 @@ const SideBar = () => {
           }
         >
           <LayoutDashboard className="shrink-0"></LayoutDashboard>
-          <span className="truncate">Task List</span>
+          <span className="truncate">Add Task</span>
         </NavLink>
 
         <div className="divider divider-neutral border-2 my-2"></div>

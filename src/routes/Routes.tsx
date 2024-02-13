@@ -3,6 +3,7 @@ import {
   } from "react-router-dom";
 import App from "../App";
 import TaskList from "@/pages/TaskList/TaskList";
+import AddTask from "@/pages/TaskList/AddTask";
   
   const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ import TaskList from "@/pages/TaskList/TaskList";
         {
             index: true,
             element: <TaskList></TaskList>
+        },
+        {
+          path: "add-task",
+          element: <AddTask></AddTask>
         }
       ]
     },

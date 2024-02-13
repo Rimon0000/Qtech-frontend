@@ -56,17 +56,27 @@ const TaskList = () =>{
                   <TableHead className="text-right">Action</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody className="font-semibold">
                 {tasks.map((task, index) => (
                   <TableRow key={index}>
                     <TableCell>{task?.title}</TableCell>
                     <TableCell>{task?.status}</TableCell>
                     <TableCell className="text-right flex items-center justify-end place-content-center mt-7">
-                        <Button>  Completed</Button>
-                        <hr className="border-2 border-gray-500 h-8 inline-block mx-2"></hr>
-                        <Button className="p-1" variant="destructive">
-                            <Trash2 onClick={() => handleDelete(task.id)}></Trash2>
+                      <div className="flex justify-end items-center space-x-2">
+                        <Button
+                          onClick={() => handleDelete(task.id)}
+                          className=" hover:bg-slate-600  px-4 py-2 rounded-md"
+                        >
+                          Completed
                         </Button>
+                        <hr className="border-2 h-7 bg-slate-800"></hr>
+                        <Button
+                          onClick={() => handleDelete(task.id)}
+                          className=" hover:bg-slate-700  px-4 py-2 rounded-md"
+                        >
+                          <Trash2 className="h-6 w-6" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
