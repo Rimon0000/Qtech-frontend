@@ -13,7 +13,7 @@ const TaskList = () =>{
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
     const [selectItem, setSelectItem] = useState('')
 
-    //for get data
+    //for get data from api or local storage
     useEffect(() =>{
         try {
           fetch("https://qtec-backend.vercel.app/api/tasks")
