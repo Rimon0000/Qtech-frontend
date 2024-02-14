@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
-
 const TaskList = () =>{
     const [tasks, setTasks] = useState<TTask[]>([])
     const [isLoading, setIsLoading] = useState(true)
@@ -16,23 +15,36 @@ const TaskList = () =>{
 
     //for get data
     useEffect(() =>{
-        fetch("http://localhost:5000/api/tasks")
-        .then(res => res.json())
-        .then(data => {
-            setTasks(data.data)
+        try {
+          fetch("http://localhost:5000/api/tasks")
+          .then(res => res.json())
+          .then(data => {
+              setTasks(data.data)
+              setIsLoading(false)
+          })
+        } 
+        catch (err) {
+          console.error('Error fetching data from server:', err);
+          const storedTasks = localStorage.getItem('tasks');
+          if (storedTasks) {
+              setTasks(JSON.parse(storedTasks));
+              setIsLoading(false);
+          }
+          else{
             setIsLoading(false)
-        })
-    })
+          }  
+        }
+    }, [tasks])
 
-    // for count completed
+    // for count completed with set data in local storage
     useEffect(() => {
-        // Count completed tasks
+        localStorage.setItem('tasks', JSON.stringify(tasks));
         const completedTasks = tasks.filter((task) => task.status === "completed");
         setCompletedTasksCount(completedTasks.length);
       }, [tasks]);
 
     if (isLoading) {
-        return <p>Loading .....</p>;
+        return <p className="text-xl">Loading .....</p>;
       }
 
 
@@ -65,13 +77,11 @@ const TaskList = () =>{
 
   //handle complete
   const handleMakeComplete = (id : string) =>{
-    console.log(id);
     fetch(`http://localhost:5000/api/tasks/status-complete/${id}`,{
       method: 'PATCH'
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data);
       if(data && data.success){
         Swal.fire({
           position: 'top-end',
