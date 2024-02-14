@@ -1,12 +1,13 @@
+import {  TTask } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
 const UpdateTask = () =>{
-    const task = useLoaderData()
+    const task = useLoaderData() as TTask
     const {_id, title, status, priority} = task.data
     console.log(_id);
 
@@ -14,9 +15,9 @@ const UpdateTask = () =>{
     const [isStatus, setStatus] = useState(status);
 
 
-    const handleUpdate = (e) =>{
+    const handleUpdate = (e:FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
-        const form = e.target 
+        const form = e.target;
         const updatedTitle = form.title.value;
     
         const updateTask = {

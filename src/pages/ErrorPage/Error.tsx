@@ -1,8 +1,9 @@
+import { TRouteError } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import { Link, useRouteError } from "react-router-dom";
 
 const Error = () => {
-    const {status, error } = useRouteError()
+    const {status, error } = useRouteError() as TRouteError;
   return (
     <div className="h-[100vh]">
       <main className="h-screen w-full flex flex-col justify-center items-center ">

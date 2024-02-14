@@ -1,3 +1,4 @@
+import { TTask } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 import { FilePenLine, Trash2 } from "lucide-react";
@@ -8,7 +9,7 @@ import Swal from "sweetalert2";
 
 
 const TaskList = () =>{
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState<TTask[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
     const [selectItem, setSelectItem] = useState('')
@@ -36,7 +37,7 @@ const TaskList = () =>{
 
 
   //handle delete
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -63,7 +64,7 @@ const TaskList = () =>{
   
 
   //handle complete
-  const handleMakeComplete = (id) =>{
+  const handleMakeComplete = (id : string) =>{
     console.log(id);
     fetch(`http://localhost:5000/api/tasks/status-complete/${id}`,{
       method: 'PATCH'
@@ -84,7 +85,7 @@ const TaskList = () =>{
   }
 
   //filter by priority
-    const handleChange = (e) =>{
+    const handleChange = (e : React.ChangeEvent<HTMLSelectElement>) =>{
         setSelectItem(e.target.value)
     }
     const filterBasedOnPriority = tasks.filter(task => task.priority === selectItem || selectItem === '')
