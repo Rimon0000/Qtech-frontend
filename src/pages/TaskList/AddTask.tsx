@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 const AddTask = () => {
-    const [priority, setPriority] = useState("");
-    const [status, setStatus] = useState("");
 
     //handle new Task
     const handleAddNewTask = async(e: any) =>{
@@ -62,7 +59,7 @@ const AddTask = () => {
                 </div>
                 <div>
                 <Label htmlFor="Priority" className="flex text-left py-2 text-base">Priority</Label>
-                    <select name="priority" onChange={(e) => setPriority(e.target.value)}
+                    <select name="priority" 
                       className="shadow  border rounded w-full py-3 px-3 mb-4 text-gray-700"
                     >
                       <option value="low">Low Priority</option>
@@ -74,7 +71,7 @@ const AddTask = () => {
                     <Label htmlFor="Status" className="flex text-left py-2 text-base">Status</Label>
                     <select
                       name="status"
-                      onChange={(e) => setStatus(e.target.value)}
+            
                       className="shadow  border rounded w-full py-3 px-3 mb-6 text-gray-700"
                     >
                       <option value="completed">Completed</option>

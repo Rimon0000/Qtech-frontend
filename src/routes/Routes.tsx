@@ -6,11 +6,13 @@ import TaskList from "@/pages/TaskList/TaskList";
 import AddTask from "@/pages/TaskList/AddTask";
 import UpdateTask from "@/pages/TaskList/UpdateTask";
 import Home from "@/pages/TaskList/Home";
+import Error from "@/pages/ErrorPage/Error";
   
   const router = createBrowserRouter([
     {
       path: "/",
       element: <App></App>,
+      errorElement: <Error></Error>,
       children: [
         {
             index: true,
@@ -25,7 +27,7 @@ import Home from "@/pages/TaskList/Home";
           element: <AddTask></AddTask>
         },
         {
-          path: "update-task/:id",
+          path: "task-list/update-task/:id",
           element: <UpdateTask></UpdateTask>,
           loader: ({params}) => fetch(`http://localhost:5000/api/tasks/${params.id}`)
         }

@@ -91,7 +91,7 @@ const TaskList = () =>{
 
 
     return (
-        <div className="overflow-x-auto">
+        <div className="">
             <div className="text-right mb-2 font-semibold">
                 <select value={selectItem || ""} onChange={handleChange} className="border-2 py-2 px-4 rounded-md">
                   <option value="" className='bg-slate-300 px-8 py-2'>Filter By Priority</option>
@@ -100,7 +100,7 @@ const TaskList = () =>{
                   <option  value="high">High</option>
                 </select>
             </div>
-            <div className="max-w-full overflow-x-auto">
+            <div className="max-w-full overflow-x-scroll">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -143,7 +143,7 @@ const TaskList = () =>{
                     </TableRow>
                   ))}
                 </TableBody>
-                <TableFooter>
+                <TableFooter className="text-slate-800">
                   <TableRow className="text-lg">
                       <TableCell>Number of Total Tasks:</TableCell>
                       <TableCell>{tasks.length}</TableCell>
