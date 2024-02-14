@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {  TTask } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -15,7 +16,7 @@ const UpdateTask = () =>{
     const [isStatus, setStatus] = useState(status);
 
 
-    const handleUpdate = (e:FormEvent<HTMLFormElement>) =>{
+    const handleUpdate = (e:any) =>{
         e.preventDefault()
         const form = e.target;
         const updatedTitle = form.title.value;
@@ -27,7 +28,7 @@ const UpdateTask = () =>{
         }
 
         //send data to the server
-        fetch(`http://localhost:5000/api/tasks/update-task/${_id}`,{
+        fetch(`https://qtec-backend.vercel.app/api/tasks/update-task/${_id}`,{
           method: 'PATCH',
           headers: {
             'content-type': 'application/json'

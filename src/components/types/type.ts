@@ -6,7 +6,7 @@ export type TTask = {
     priority: 'low' | 'medium' | 'high';
 }
 
-export type TRouteError {
+export type TRouteError = {
     status: number;
     error?: Error;
 }

@@ -16,7 +16,7 @@ const TaskList = () =>{
     //for get data
     useEffect(() =>{
         try {
-          fetch("http://localhost:5000/api/tasks")
+          fetch("https://qtec-backend.vercel.app/api/tasks")
           .then(res => res.json())
           .then(data => {
               setTasks(data.data)
@@ -60,7 +60,7 @@ const TaskList = () =>{
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await fetch(`http://localhost:5000/api/tasks/${id}`,{
+        await fetch(`https://qtec-backend.vercel.app/api/tasks/${id}`,{
           method: "DELETE",
         });
         const remaining = tasks.filter(task => task._id !== id)
@@ -77,7 +77,7 @@ const TaskList = () =>{
 
   //handle complete
   const handleMakeComplete = (id : string) =>{
-    fetch(`http://localhost:5000/api/tasks/status-complete/${id}`,{
+    fetch(`https://qtec-backend.vercel.app/api/tasks/status-complete/${id}`,{
       method: 'PATCH'
     })
     .then(res => res.json())

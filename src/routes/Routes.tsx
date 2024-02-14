@@ -29,7 +29,7 @@ import Error from "@/pages/ErrorPage/Error";
         {
           path: "task-list/update-task/:id",
           element: <UpdateTask></UpdateTask>,
-          loader: ({params}) => fetch(`http://localhost:5000/api/tasks/${params.id}`)
+          loader: ({params}) => fetch(`https://qtec-backend.vercel.app/api/tasks/${params.id}`)
         }
       ]
     },

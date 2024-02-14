@@ -22,7 +22,7 @@ const AddTask = () => {
     console.log(newTask);
 
     // //send data to the server 
-    fetch('http://localhost:5000/api/tasks',{
+    fetch('https://qtec-backend.vercel.app/api/tasks',{
         method: 'POST',
         headers:{
             'content-type': 'application/json'
